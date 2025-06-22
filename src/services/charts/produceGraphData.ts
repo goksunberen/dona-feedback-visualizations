@@ -13,9 +13,10 @@ import {calculateMinMaxDates} from "@services/rangeFiltering";
 
 export default function produceGraphData(donorId: string, allConversations: Conversation[]): Record<string, GraphData> {
     return Object.fromEntries(
+        Array.from(
         Map.groupBy(allConversations, ({ dataSource }) => dataSource)
             .entries()
-            .map(([dataSourceValue, conversations]) => {
+            ).map(([dataSourceValue, conversations]) => {
                 // Extract focus conversations
                 const focusConversations = conversations
                     .filter((conversation) => conversation.focusInFeedback)
